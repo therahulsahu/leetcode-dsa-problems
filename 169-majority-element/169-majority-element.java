@@ -1,18 +1,16 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        int n = nums.length;
-        HashMap<Integer, Integer> hm = new HashMap<>();
-
-        for(int x: nums) {
-            if(hm.containsKey(x)) {
-                hm.put(x, hm.get(x) + 1);
-                if(hm.get(x) > n / 2) {
-                    return x;
-                }
-            } else {
-                hm.put(x, 1);
+        // Boyce-Moore Algorithm
+        int count = 0;
+        int candidate = 0;
+        
+        for(int n : nums) {
+            if(count == 0) {
+                candidate = n;
             }
+            
+            count += (candidate == n) ? 1 : -1;
         }
-        return nums[0];
+        return candidate;
     }
 }
