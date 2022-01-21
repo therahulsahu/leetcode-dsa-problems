@@ -1,13 +1,17 @@
 class Solution {
     public int findKthPositive(int[] arr, int k) {
-        int i = 0;
-        while(k >= arr[i]) {
-            k++;
-            i++;
-            if(i == arr.length){
-                break;
+        // binary search
+        
+        int start = 0, end = arr.length, mid;
+        
+        while(start < end) {
+            mid = start + (end - start) / 2;
+            if(arr[mid] - (mid + 1) >= k) {
+                end =  mid;
+            } else {
+                start = mid + 1;
             }
         }
-        return k;
+        return start + k;
     }
 }
