@@ -10,6 +10,7 @@ class Solution {
         }
         int count = 0;
         
+        // strictly less than n
         for(int i = 2; i < n; i++) {
             if(primes[i]) {
                 count++;
