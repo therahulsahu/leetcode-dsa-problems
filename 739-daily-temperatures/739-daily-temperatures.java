@@ -6,20 +6,14 @@ class Solution {
         Stack<Integer> stack = new Stack<>(); // will contain index
         
         for(int i = n - 1; i >= 0; i--) {
-            if(stack.isEmpty()) {
-                result[i] = i;
-            } else if(temperatures[stack.peek()] > temperatures[i]) {
+            while(stack.size() > 0 && temperatures[stack.peek()] <= temperatures[i]) {
+                stack.pop();
+            }
+
+            if(stack.size() > 0) {
                 result[i] = stack.peek();
             } else {
-                while(stack.size() > 0 && temperatures[stack.peek()] <= temperatures[i]) {
-                    stack.pop();
-                }
-                
-                if(stack.size() > 0) {
-                    result[i] = stack.peek();
-                } else {
-                    result[i] = i;
-                }
+                result[i] = i;
             }
             stack.push(i);
         }
