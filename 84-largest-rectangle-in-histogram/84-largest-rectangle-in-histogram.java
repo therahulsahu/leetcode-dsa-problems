@@ -4,12 +4,12 @@ class Solution {
         int[] nsl = nearestSmallerToLeft(heights);
         int[] nsr = nearestSmallerToRight(heights);      
 
-        int[] width = new int[n];
         int maxArea = Integer.MIN_VALUE;
+        int width = 0;
         
         for(int i = 0; i < n; i++) {
-            width[i] = nsr[i] - nsl[i] - 1;
-            maxArea = Math.max(maxArea, heights[i] * width[i]);
+            width = nsr[i] - nsl[i] - 1;
+            maxArea = Math.max(maxArea, heights[i] * width);
         }
         return maxArea;
     }
