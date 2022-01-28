@@ -4,20 +4,14 @@ class Solution {
         HashMap<Integer, Integer> hm = new HashMap<>();
         
         for(int i = nums2.length - 1; i >= 0; i--) {
-            if(stack.isEmpty()) {
-                hm.put(nums2[i], -1);
-            } else if(stack.peek() > nums2[i]) {
+            while(stack.size() > 0 && stack.peek() <= nums2[i]) {
+                stack.pop();
+            }
+
+            if(stack.size() > 0) {
                 hm.put(nums2[i], stack.peek());
             } else {
-                while(stack.size() > 0 && stack.peek() <= nums2[i]) {
-                    stack.pop();
-                }
-                
-                if(stack.size() > 0) {
-                    hm.put(nums2[i], stack.peek());
-                } else {
-                    hm.put(nums2[i], -1);
-                }
+                hm.put(nums2[i], -1);
             }
             stack.push(nums2[i]);
         }
