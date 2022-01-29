@@ -5,17 +5,16 @@ class Solution {
         int[] nsr = nearestSmallerToRight(heights);      
 
         int maxArea = Integer.MIN_VALUE;
-        int width = 0;
         
         for(int i = 0; i < n; i++) {
-            width = nsr[i] - nsl[i] - 1;
+            int width = nsr[i] - nsl[i] - 1;
             maxArea = Math.max(maxArea, heights[i] * width);
         }
         return maxArea;
     }
     
     int[] nearestSmallerToLeft(int[] heights) {
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         int[] result = new int[heights.length];
         for(int i = 0; i < heights.length; i++) {
             while(!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
@@ -33,7 +32,7 @@ class Solution {
     }
     
     int[] nearestSmallerToRight(int[] heights) {
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         int[] result = new int[heights.length];
         for(int i = heights.length - 1; i >= 0; i--) {
             while(!stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
