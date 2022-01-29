@@ -1,22 +1,25 @@
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
         int n = nums.length;
-        int[] tempNums = new int[n * 2];
-        for(int i = 0; i < n; i++) {
-            tempNums[i] = tempNums[n + i] = nums[i];
-        }
         
-        int[] result = new int[n * 2];
+        int[] result = new int[n];
         Deque<Integer> stack = new ArrayDeque<>();
         Arrays.fill(result, -1);
         
-        for(int i = 0; i < tempNums.length - 1; i++) {
-            while(!stack.isEmpty() && tempNums[stack.peek()] < tempNums[i]) {
-                result[stack.pop()] = tempNums[i];
+        for(int i = 0; i < nums.length; i++) {
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[i]) {
+                result[stack.pop()] = nums[i];
             }
             stack.push(i);
         }
         
-        return Arrays.copyOf(result, n);
+        // second time
+        for(int i = 0; i < nums.length; i++) {
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[i]) {
+                result[stack.pop()] = nums[i];
+            }
+        }
+        
+        return result;
     }
 }
