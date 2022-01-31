@@ -5,13 +5,16 @@ class Solution {
             map.put(n, map.getOrDefault(n, 0) + 1);
         }
 
-        PriorityQueue<int[]> maxHeap = new PriorityQueue<>(((o1, o2) -> o2[1] - o1[1]));
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>(Comparator.comparingInt(o1 -> o1[1]));
         for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            maxHeap.add(new int[]{entry.getKey(), entry.getValue()});
+            minHeap.add(new int[]{entry.getKey(), entry.getValue()});
+            if(minHeap.size() > k) {
+                minHeap.poll();
+            }
         }
         int[] result = new int[k];
-        for(int i = 0; i < k; i++) {
-            result[i] = maxHeap.poll()[0];
+        for(int i = k - 1; i >= 0; i--) {
+            result[i] = minHeap.poll()[0];
         }
         return result;
     }
