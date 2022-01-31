@@ -2,11 +2,7 @@ class Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
         int[] rows = new int[mat.length];
         for(int i = 0; i < mat.length; i++) {
-            int sum = 0;
-            for(int j = 0; j < mat[i].length; j++) {
-                sum += mat[i][j];
-            }
-            rows[i] = sum;
+            rows[i] = numOnes(mat[i]);
         }
         
         PriorityQueue<int[]> maxHeap = new PriorityQueue<>((o1, o2) -> o1[0] != o2[0] ? o2[0] - o1[0] : o2[1] - o1[1]);
@@ -25,4 +21,21 @@ class Solution {
         
         return result;
     }
+    
+    
+    // binary search for no. of ones
+    private int numOnes(int[] rows) {
+        int lo = 0, hi = rows.length;
+        int mid;
+        while(lo < hi) {
+            mid = lo + (hi - lo) / 2;
+            if(rows[mid] == 1){
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+    
 }
