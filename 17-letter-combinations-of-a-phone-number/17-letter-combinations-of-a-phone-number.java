@@ -5,22 +5,22 @@ class Solution {
         if(digits.length() == 0) {
             return result;
         }
-        StringBuilder op = new StringBuilder();
+        String op = "";
         solve(digits, op, 0, letters, result);
         return result;
     }
     
-    private void solve(String digits, StringBuilder op, int index, String[] letters, List<String> result) {
+    private void solve(String digits, String op, int index, String[] letters, List<String> result) {
         if(index == digits.length()) {
-            result.add(new String(op));
+            result.add(op);
             return;
         }
         
         int digit = digits.charAt(index) - '0';
         for(char c: letters[digit].toCharArray()) {
-            op.append(c);
+            op += c;
             solve(digits, op, index + 1, letters, result);
-            op.deleteCharAt(op.length() - 1);
+            op = op.substring(0, op.length() - 1);
         }
     }
 }
