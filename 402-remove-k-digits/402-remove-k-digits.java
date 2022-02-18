@@ -3,15 +3,14 @@ class Solution {
         if(num.length() == k) {
             return "0";
         }
-        Deque<Integer> stack = new ArrayDeque<>();
+        Deque<Character> stack = new ArrayDeque<>();
         int count = 0;
         for(char c: num.toCharArray()) {
-            int n = c - '0';
-            while(!stack.isEmpty() && stack.peek() > n && count < k) {
+            while(!stack.isEmpty() && stack.peek() > c && count < k) {
                 stack.pop();
                 count++;
             }
-            stack.push(n);
+            stack.push(c);
         }
         
         while(count < k) {
@@ -21,10 +20,13 @@ class Solution {
         
         StringBuilder op = new StringBuilder();
         while(!stack.isEmpty()) {
-            op.append(Character.forDigit(stack.pop(), 10));
+            op.append(stack.pop());
         }
         op.reverse();
-        String result = new String(op);
-        return result.replaceFirst("^0+(?!$)", "");
+        
+        while(op.length() > 1 && op.charAt(0) == '0') {
+            op.deleteCharAt(0);
+        }
+        return op.toString();
     }
 }
