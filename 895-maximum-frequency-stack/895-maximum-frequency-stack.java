@@ -1,5 +1,5 @@
 class FreqStack {
-    HashMap<Integer, Deque<Integer>> st;
+    HashMap<Integer, LinkedList<Integer>> st;
     HashMap<Integer, Integer> freqMap;
     int maxFreq;
     public FreqStack() {
@@ -13,7 +13,7 @@ class FreqStack {
         freq++;
         freqMap.put(val, freq);
         if(!st.containsKey(freq)) {
-            st.put(freq, new ArrayDeque<>());
+            st.put(freq, new LinkedList<>());
         }
         st.get(freq).push(val);
         maxFreq = Math.max(maxFreq, freq);
