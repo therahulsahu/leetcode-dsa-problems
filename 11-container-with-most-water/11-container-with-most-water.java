@@ -3,7 +3,8 @@ class Solution {
         int l = 0, r = height.length - 1;
         int maxWater = Integer.MIN_VALUE;
         while(l < r) {
-            maxWater = Math.max(maxWater, Math.min(height[l], height[r]) * (r - l));
+            int area = Math.min(height[l], height[r]) * (r - l);
+            maxWater = Math.max(maxWater, area);
             if(height[l] < height[r]) {
                 l++;
             } else if(height[l] > height[r]){
